@@ -8,7 +8,7 @@ const authMiddleware = async (req, res, next) => {
 
     // check if it actually exist or not
     if (!authHeader) {
-        return res.status(401).json({ message: 'Authorization token missing or invalid' });
+        return res.status(401).json({ statusCode: 401, message: 'Authorization token missing or invalid' });
     }
 
     const token = authHeader.split(' ')[1];
@@ -21,7 +21,7 @@ const authMiddleware = async (req, res, next) => {
         req.user = user.data;
         next();
     } catch (error) {
-        return res.status(401).json({ message: 'Invalid or expired token' });
+        return res.status(401).json({ statusCode: 401, message: 'Invalid or expired token' });
     }
 };
 

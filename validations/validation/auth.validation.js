@@ -20,7 +20,7 @@ export const validateSignup = Joi.object({
         }),
     password: Joi.string()
         .min(8)
-        .required(),
+        .required(), // for simplicity we are not adding regex and validate based on small, cap and special character
     firstName: Joi.string()
         .trim()
         .required()

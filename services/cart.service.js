@@ -6,13 +6,17 @@ import AppError from "../utils/errors/AppError.js";
 
 export const createCart = async (payload) => {
     try {
-        const { productId, itemCount } = payload;
+        const { userId, productId, itemCount } = payload;
         // checking if the product id from the req exist or not
         // this can be done on mogoose schema level too
         const checkProduct = await Products.findById(productId);
         if (!checkProduct) {
             throw new AppError("Product added does not exist.", checkProduct, 404);
         }
+
+        // check if cart already exist to avoid duplicate cart for the same user and product
+        const existingCart = await Carts.findOne({ userId, productId });
+        if (existingCart) throw new AppError("Cart already exist for this product.", existingCart, 409);
 
         const newPayload = {
             ...payload,
