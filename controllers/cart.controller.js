@@ -6,6 +6,7 @@ export const addToCart = async (req, res, next) => {
         const user = req.user;
         const payload = req.body;
 
+        // add the logged in user to userId
         payload.userId = user._id;
         const response = await CartService.createCart(payload);
         return res.status(response.statusCode).json(response);

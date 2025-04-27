@@ -40,7 +40,7 @@ export const login = async ({ email, password }) => {
             throw new AppError('Email or password is incorrect.', user, 400)
         }
 
-        // this will be our payload for the jwt token.
+        // This will be our payload for the jwt token.
         // we can add any field as per requirement
         const tokenPayload = {
             email: user.email,

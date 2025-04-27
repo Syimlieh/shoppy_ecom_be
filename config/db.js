@@ -24,8 +24,8 @@ const connectDB = async () => {
     logger.info("Connected to Database");
 
     // Seeding some dummy data for our list of products as in the docs it is not mentioned to add products
-    const checkUserExist = await Products.findOne({});
-    if (!checkUserExist) {
+    const checkProduct = await Products.findOne({});
+    if (!checkProduct) {
       const addExist = await Products.insertMany(ProductsJson)
       if (addExist.length) {
         logger.info("Products seeded successfully")

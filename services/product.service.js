@@ -23,14 +23,14 @@ export const getProducts = async () => {
 
 export const getProduct = async (id) => {
     try {
-        const user = await Products.findById(id);
-        if (!user) {
-            throw new AppError('Product does not exist.', user, 404)
+        const product = await Products.findById(id);
+        if (!product) {
+            throw new AppError('Product does not exist.', product, 404)
         }
         return {
             statusCode: 200,
             message: 'Product fetch successfully.',
-            data: user,
+            data: product,
         }
     } catch (error) {
         logger.error(`Failed while fetching Error => ${error.message}`)
